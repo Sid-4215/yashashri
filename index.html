@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're the Most Beautiful Girl</title>
+    <style>
+        /* Full-screen background gradient animation */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b81, #f1c40f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Container for the main content */
+        .container {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: scaleUp 2s forwards 1s;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0;
+            animation: floatHeart 3s ease-in-out infinite;
+        }
+
+        .shayari {
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            display: none; /* Hidden initially */
+            animation: fadeInMessage 3s forwards 4s;
+            font-style: italic;
+        }
+
+        /* Button to trigger the surprise */
+        .btn {
+            background-color: #ff6b81;
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 30px;
+            opacity: 1;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #f1c40f;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes scaleUp {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes floatHeart {
+            0% { opacity: 0; transform: translateY(0) rotate(0); }
+            50% { opacity: 1; transform: translateY(-50px) rotate(45deg); }
+            100% { opacity: 0; transform: translateY(0) rotate(90deg); }
+        }
+
+        @keyframes fadeInMessage {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem; /* Smaller title on mobile */
+            }
+
+            .shayari {
+                font-size: 1.2rem; /* Smaller message on mobile */
+            }
+
+            .btn {
+                font-size: 1.2rem; /* Adjust button size */
+                padding: 12px 25px; /* Adjust button padding */
+            }
+
+            .heart {
+                font-size: 30px; /* Smaller hearts for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5rem; /* Even smaller title on smaller screens */
+            }
+
+            .shayari {
+                font-size: 1.2rem; /* Even smaller message on smaller screens */
+            }
+
+            .btn {
+                font-size: 1rem; /* Smaller button on small screens */
+                padding: 10px 20px; /* Smaller button padding */
+            }
+
+            .heart {
+                font-size: 25px; /* Even smaller hearts */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>𝒟𝑒𝒶𝓇 𝓎𝒶𝓈𝒽𝒶𝓈𝒽𝓇𝒾</h2>
+        <div class="shayari">
+            "Teri aankhon mein wo khaas baat hai, jo dil ko kheenchti hai,<br>
+            Maine kabhi tujhe dekha nahi, phir bhi tu dil mein basi hai.<br>
+            Teri muskaan mein kuch aisa hai, jo dil ko chain deta hai,<br>
+            Kya kabhi tum meri raahon mein shamil ho paogi? 💭❤️"
+        </div>
+        <button class="btn" onclick="triggerSurprise()">Click Me</button>
+    </div>
+
+    <script>
+        // Function to trigger the surprise animation
+        function triggerSurprise() {
+            // Show the shayari with animation
+            const shayari = document.querySelector('.shayari');
+            shayari.style.display = 'block'; // Make the shayari visible
+            shayari.style.animation = 'fadeInMessage 3s forwards'; // Apply animation
+
+            // Create random hearts that float across the screen
+            for (let i = 0; i < 10; i++) {
+                createFloatingHeart();
+            }
+        }
+
+        // Function to create a floating heart at random positions
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            document.body.appendChild(heart);
+
+            // Randomize position and animation delay
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.top = `${Math.random() * 100}vh`;
+            heart.style.animationDelay = `${Math.random() * 3}s`;
+
+            // The hearts will not be removed, they will just keep floating infinitely
+        }
+    </script>
+</body>
+</html>
