@@ -85,6 +85,30 @@
             transform: scale(1.1);
         }
 
+        /* Like heart button (same as Click Me) */
+        .like-btn {
+            background-color: #ff6b81;
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px; /* Same rounded button */
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s ease;
+        }
+
+        .like-btn:hover {
+            background-color: #f1c40f;
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+
+        /* Liked button style */
+        .like-btn.liked {
+            background-color: #2ecc71; /* Green when liked */
+            transform: scale(1.1); /* Maintain scale effect when clicked */
+        }
+
         /* Animations */
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -126,6 +150,10 @@
             .heart {
                 font-size: 30px; /* Smaller hearts for mobile */
             }
+
+            .like-btn {
+                font-size: 1.2rem; /* Same size for like button on mobile */
+            }
         }
 
         @media (max-width: 480px) {
@@ -145,6 +173,10 @@
             .heart {
                 font-size: 25px; /* Even smaller hearts */
             }
+
+            .like-btn {
+                font-size: 1rem; /* Even smaller like button */
+            }
         }
     </style>
 </head>
@@ -158,6 +190,8 @@
             Kya kabhi tum meri raahon mein shamil ho paogi? 💭❤️"
         </div>
         <button class="btn" onclick="triggerSurprise()">Click Me</button>
+        <!-- Like heart button, now same as Click Me -->
+        <button class="like-btn" onclick="likeHeart()">❤️ Like</button>
     </div>
 
     <script>
@@ -172,16 +206,6 @@
             for (let i = 0; i < 10; i++) {
                 createFloatingHeart();
             }
-
-            // Send event to Google Analytics with session data
-            gtag('event', 'click_me_pressed', {
-                'event_category': 'Button Interaction',
-                'event_label': navigator.userAgent, // Captures browser, OS, device
-                'screen_width': window.screen.width,
-                'screen_height': window.screen.height,
-                'language': navigator.language,
-                'timestamp': new Date().toISOString()
-            });
         }
 
         // Function to create a floating heart at random positions
@@ -197,6 +221,23 @@
             heart.style.animationDelay = `${Math.random() * 3}s`;
 
             // The hearts will not be removed, they will just keep floating infinitely
+        }
+
+        // Function to handle the like heart click event
+        function likeHeart() {
+            // Toggle the "liked" class to change the button color
+            const likeBtn = document.querySelector('.like-btn');
+            likeBtn.classList.toggle('liked');
+
+            // Send event to Google Analytics with like data
+            gtag('event', 'heart_liked', {
+                'event_category': 'User Interaction',
+                'event_label': 'Heart Like Button',
+                'timestamp': new Date().toISOString()
+            });
+
+            // Create a floating heart when the button is pressed
+            createFloatingHeart();
         }
     </script>
 </body>
