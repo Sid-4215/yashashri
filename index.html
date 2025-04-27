@@ -172,6 +172,16 @@
             for (let i = 0; i < 10; i++) {
                 createFloatingHeart();
             }
+
+            // Send event to Google Analytics with session data
+            gtag('event', 'click_me_pressed', {
+                'event_category': 'Button Interaction',
+                'event_label': navigator.userAgent, // Captures browser, OS, device
+                'screen_width': window.screen.width,
+                'screen_height': window.screen.height,
+                'language': navigator.language,
+                'timestamp': new Date().toISOString()
+            });
         }
 
         // Function to create a floating heart at random positions
